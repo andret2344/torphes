@@ -1,1 +1,1 @@
-rootProject.name = "ads-torphes"
+rootProject.name = "torphes"
