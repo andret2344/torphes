@@ -1,11 +1,11 @@
-package eu.andret.ads.torphes.guild;
+package eu.andret.torphes.guild;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.events.Event;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
-import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
+import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,8 +20,9 @@ public class GuildsCountListener extends ListenerAdapter {
 		setPresence(event);
 	}
 
+	// Fires once after all guilds are loaded, unlike GuildReadyEvent which fires for every guild
 	@Override
-	public void onGuildReady(@NotNull final GuildReadyEvent event) {
+	public void onReady(@NotNull final ReadyEvent event) {
 		setPresence(event);
 	}
 

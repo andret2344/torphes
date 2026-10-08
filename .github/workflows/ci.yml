@@ -49,9 +49,6 @@ jobs:
       - name: Make gradlew executable
         run: chmod u+x gradlew*
 
-      - name: Write config.properties (opcjonalnie z secretu)
-        run: printf "%s" "${{ secrets.CONFIG_PROPERTIES }}" > src/main/resources/config.properties
-
       - name: Build
         run: ./gradlew build --no-daemon
 

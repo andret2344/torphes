@@ -1,4 +1,4 @@
-package eu.andret.ads.torphes.entity;
+package eu.andret.torphes.entity;
 
 import org.jetbrains.annotations.NotNull;
 

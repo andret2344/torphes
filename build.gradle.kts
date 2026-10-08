@@ -1,6 +1,5 @@
 plugins {
     java
-    idea
     application
 }
 
@@ -9,22 +8,33 @@ repositories {
 }
 
 dependencies {
-    implementation(libs.jda)
+    implementation(libs.jda) {
+        // Audio encoding and encryption, the bot never joins voice channels
+        exclude(module = "opus-java")
+        exclude(module = "tink")
+    }
     implementation(libs.gson)
     // logging
     implementation(libs.slf4j.api)
-    implementation(libs.log4j.slf4j.impl)
     implementation(libs.log4j.core)
+    runtimeOnly(libs.log4j.slf4j.impl)
+    // testing
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.junit.jupiter)
+    testRuntimeOnly(libs.junit.platform.launcher)
 }
 
 application {
-    mainClass.set("eu.andret.ads.torphes.Torphes")
+    mainClass = "eu.andret.torphes.Torphes"
 }
 
 tasks {
     compileJava {
-        sourceCompatibility = JavaVersion.VERSION_21.toString()
-        targetCompatibility = JavaVersion.VERSION_21.toString()
+        options.release = 21
+    }
+
+    test {
+        useJUnitPlatform()
     }
 
     jar {
@@ -35,7 +45,7 @@ tasks {
         })
 
         manifest {
-            attributes["Main-Class"] = application.mainClass.get()
+            attributes["Main-Class"] = application.mainClass
         }
     }
 }
